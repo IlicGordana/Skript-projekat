@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "Gilic.98#",
+    "database": "onlineshop",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password":  "Gilic.98#",
+    "database": "onlineshop",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username":  "Gilic.98#",
+    "password": null,
+    "database": "onlineshop",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

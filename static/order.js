@@ -1,6 +1,7 @@
 function init() {
 
-
+    const cookies = document.cookie.split('=');
+    const token = cookies[cookies.length - 1];
     fetch('http://localhost:8000/admin/order', {
         headers: {
             'Authorization': `Bearer ${token}`
@@ -50,23 +51,17 @@ function init() {
         e.preventDefault();
 
         const data = {
-            firstName: document.getElementById('firstName').value,
-            lastName: document.getElementById('lastName').value,
-            email: document.getElementById('email').value,
-            username: document.getElementById('username').value,
-            password: document.getElementById('password').value,
+            orderNumber: document.getElementById('orderNumber').value,
             id: document.getElementById('id').value
 
 
         };
 
-        document.getElementById('firstName').value = '';
-        document.getElementById('lastName').value = '';
-        document.getElementById('email').value = '';
-        document.getElementById('username').value = '';
-        document.getElementById('password').value = '';
+        document.getElementById('orderNumber').value = '';
+        document.getElementById('id').value= '';
 
-        fetch('http://localhost:8000/admin/users/' + id, {
+
+        fetch('http://localhost:8000/admin/order/' + data.id, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -78,7 +73,8 @@ function init() {
                 if (el.msg) {
                     alert(el.msg);
                 } else {
-                    document.getElementById('productLst').innerHTML += `<li>ID: ${el.id}, Body: ${el.body}</li>`;
+                    document.getElementById('orderLst').innerHTML +=`<li>ID: ${el.id}, orderNumber: ${el.orderNumber}
+                    </li>`;
                 }
             });
     });
@@ -87,22 +83,17 @@ function init() {
         e.preventDefault();
 
         const data = {
-            firstName: document.getElementById('firstName').value,
-            lastName: document.getElementById('lastName').value,
-            email: document.getElementById('email').value,
-            username: document.getElementById('username').value,
-            password: document.getElementById('password').value,
+            orderNumber: document.getElementById('orderNumber').value,
+            id: document.getElementById('id').value
 
 
         };
 
-        document.getElementById('firstName').value = '';
-        document.getElementById('lastName').value = '';
-        document.getElementById('email').value = '';
-        document.getElementById('username').value = '';
-        document.getElementById('password').value = '';
+        document.getElementById('orderNumber').value = '';
+        document.getElementById('id').value= '';
 
-        fetch('http://localhost:8000/admin/users/:id', {
+
+        fetch('http://localhost:8000/admin/order/' + data.id, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -115,7 +106,8 @@ function init() {
                 if (el.msg) {
                     alert(el.msg);
                 } else {
-                    document.getElementById('productLst').innerHTML += `<li>ID: ${el.id}, Body: ${el.body}</li>`;
+                    document.getElementById('orderLst').innerHTML +=`<li>ID: ${el.id}, orderNumber: ${el.orderNumber}
+                    </li>`;
                 }
             });
     });

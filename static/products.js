@@ -1,6 +1,8 @@
 function init() {
 
-
+    const cookies = document.cookie.split('=');
+    const token = cookies[cookies.length - 1];
+    
     fetch('http://localhost:8000/admin/product', {
         headers: {
             'Authorization': `Bearer ${token}`
@@ -22,15 +24,17 @@ function init() {
         e.preventDefault();
 
         const data = {
-            Code: document.getElementById('code').value,
+            code: document.getElementById('code').value,
             nameP: document.getElementById('nameP').value,
             price: document.getElementById('price').value,
+            quantity: document.getElementById('quantity').value
 
         };
 
         document.getElementById('code').value = '';
         document.getElementById('nameP').value = '';
         document.getElementById('price').value = '';
+        document.getElementById('quantity').value= '';
 
 
         fetch('http://localhost:8000/admin/product', {
@@ -58,23 +62,23 @@ function init() {
         e.preventDefault();
 
         const data = {
-            firstName: document.getElementById('firstName').value,
-            lastName: document.getElementById('lastName').value,
-            email: document.getElementById('email').value,
-            username: document.getElementById('username').value,
-            password: document.getElementById('password').value,
+            Code: document.getElementById('code').value,
+            nameP: document.getElementById('nameP').value,
+            price: document.getElementById('price').value,
+            quantity: document.getElementById('quantity').value,
             id: document.getElementById('id').value
 
 
         };
 
-        document.getElementById('firstName').value = '';
-        document.getElementById('lastName').value = '';
-        document.getElementById('email').value = '';
-        document.getElementById('username').value = '';
-        document.getElementById('password').value = '';
+        document.getElementById('code').value = '';
+        document.getElementById('nameP').value = '';
+        document.getElementById('price').value = '';
+        document.getElementById('quantity').value= '';
+        document.getElementById('id').value='';
 
-        fetch('http://localhost:8000/admin/users/' + id, {
+
+        fetch('http://localhost:8000/admin/product/' + data.id, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -95,22 +99,24 @@ function init() {
         e.preventDefault();
 
         const data = {
-            firstName: document.getElementById('firstName').value,
-            lastName: document.getElementById('lastName').value,
-            email: document.getElementById('email').value,
-            username: document.getElementById('username').value,
-            password: document.getElementById('password').value,
+            Code: document.getElementById('code').value,
+            nameP: document.getElementById('nameP').value,
+            price: document.getElementById('price').value,
+            quantity: document.getElementById('quantity').value,
+            id: document.getElementById('id').value
+
 
 
         };
 
-        document.getElementById('firstName').value = '';
-        document.getElementById('lastName').value = '';
-        document.getElementById('email').value = '';
-        document.getElementById('username').value = '';
-        document.getElementById('password').value = '';
+        document.getElementById('code').value = '';
+        document.getElementById('nameP').value = '';
+        document.getElementById('price').value = '';
+        document.getElementById('quantity').value= '';
+        document.getElementById('id').value='';
 
-        fetch('http://localhost:8000/admin/users/:id', {
+
+        fetch('http://localhost:8000/admin/product/' + data.id, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

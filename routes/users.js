@@ -2,6 +2,9 @@ const express = require('express');
 const { sequelize, Users } = require('../models');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
+const bcrypt = require('bcrypt');
+const  {validateUsers} = require('../validate')
+
 
 const route = express.Router();
 route.use(express.json());
@@ -41,13 +44,13 @@ route.get('/users/:id', (req, res) => {
 });
 
 route.post('/users', (req, res) => {
-    //pohvatamo token i pitam da li je admin 
+  
     Users.create({ 
                   firstName: req.body.firstName, 
                   lastName: req.body.lastName,
                   email: req.body.email,
                   username: req.body.username,
-                  password:req.body.password,
+                  password: bcrypt.hashSync(req.body.password,10),
                   isAadmin:req.body.isAadmin,
                   isModerator:req.body.isModerator,
 
@@ -67,7 +70,6 @@ route.put('/users/:id', (req, res) => {
             usr.username = req.body.username;
             usr.password = req.body.password;
 
-            ;
 
             usr.save()
                 .then( rows => res.json(rows) )
@@ -90,3 +92,4 @@ route.delete('/users/:id', (req, res) => {
 //route.use(authToken);
 
 module.exports = route;
+
